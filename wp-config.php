@@ -26,7 +26,7 @@ define( 'DB_NAME', 'bicycle' );
 define( 'DB_USER', 'root' );
 
 /** Пароль к базе данных */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', 'A!b12345678' );
 
 /** Имя сервера базы данных */
 define( 'DB_HOST', 'localhost' );
@@ -93,3 +93,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Инициализирует переменные WordPress и подключает файлы. */
 require_once ABSPATH . 'wp-settings.php';
+
+if(is_admin()) {
+	add_filter('filesystem_method', create_function('$a', 'return "direct";' ));
+	define( 'FS_CHMOD_DIR', 0751 );
+}
